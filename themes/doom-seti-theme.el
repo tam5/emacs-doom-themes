@@ -34,7 +34,7 @@ determine the exact padding."
 
   ;; name        default   256       16
   ((bg         '("#282c34" nil       nil            ))
-   (bg-alt     '("#21242b" nil       nil            ))
+   (bg-alt     '("#0D1011" nil       nil            ))
    (base0      '("#1B2229" "black"   "black"        ))
    (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
    (base2      '("#202328" "#2e2e2e" "brightblack"  ))
@@ -171,7 +171,50 @@ determine the exact padding."
 
    ;; rjsx
    (rjsx-tag :foreground red)
-   (rjsx-attr :foreground orange))
+   (rjsx-attr :foreground orange)
+
+
+   (treemacs-file-face :foreground "#aaaaaa")
+   (treemacs-directory-face :foreground "#aaaaaa")
+   (treemacs-root-face :foreground "#aaaaaa")
+
+
+   (all-the-icons-red :foreground "#B42839")
+   (all-the-icons-lred :foreground "#E54542")
+   (all-the-icons-dred :foreground "#CB3837")
+   (all-the-icons-red-alt :foreground "#671855")
+   (all-the-icons-green :foreground "#ffffff")
+   (all-the-icons-lgreen :foreground "#43D16B")
+   (all-the-icons-dgreen :foreground "#ffffff")
+   (all-the-icons-yellow :foreground "#F0DC3E")
+   (all-the-icons-lyellow :foreground "#EED982")
+   (all-the-icons-dyellow :foreground "#FAA91A")
+   (all-the-icons-blue :foreground "#356EA0")
+   (all-the-icons-blue-alt :foreground "#283249")
+   (all-the-icons-lblue :foreground "#29A8DE")
+   (all-the-icons-dblue :foreground "#1F77CE")
+   (all-the-icons-maroon :foreground "#ffffff")
+   (all-the-icons-lmaroon :foreground "#ffffff")
+   (all-the-icons-dmaroon :foreground "#6C5FA9")
+   (all-the-icons-purple :foreground "#4A37BA")
+   (all-the-icons-purple-alt :foreground "#7F50B1")
+   (all-the-icons-lpurple :foreground "#8C6184")
+   (all-the-icons-dpurple :foreground "#542D8D")
+   (all-the-icons-orange :foreground "#EF7A39")
+   (all-the-icons-lorange :foreground "#F0582B")
+   (all-the-icons-dorange :foreground "#F0582B")
+   (all-the-icons-cyan :foreground "#00E4FF")
+   (all-the-icons-cyan-alt :foreground "#35BAA0")
+   (all-the-icons-lcyan :foreground "#829EC2")
+   (all-the-icons-dcyan :foreground "#ffffff")
+   (all-the-icons-pink :foreground "#FF4893")
+   (all-the-icons-lpink :foreground "#BCA784")
+   (all-the-icons-dpink :foreground "#ffffff")
+   (all-the-icons-silver :foreground "#40535B")
+   (all-the-icons-lsilver :foreground "#ffffff")
+   (all-the-icons-dsilver :foreground "#40535B")
+
+   )
 
   ;; --- extra variables ---------------------
   ()

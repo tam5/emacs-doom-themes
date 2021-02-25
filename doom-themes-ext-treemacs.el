@@ -137,20 +137,18 @@ Only takes effect if `doom-themes-treemacs-enable-variable-pitch' is non-nil."
       :config
       (progn
         (treemacs-create-icon
-         :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
+         :icon (format " %s\t" (all-the-icons-faicon "folder-open-o" :v-adjust -0.12 :height 0.8 :face 'all-the-icons-lsilver))
          :extensions (root-open))
         (treemacs-create-icon
-         :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
+         :icon (format " %s\t" (all-the-icons-faicon "folder" :v-adjust -0.12 :height 0.8 :face 'all-the-icons-lsilver))
          :extensions (root-closed))
         (treemacs-create-icon
-         :icon (format "%s\t%s\t"
-                       (all-the-icons-octicon "chevron-down" :height 0.75 :v-adjust 0.1 :face face-spec)
-                       (all-the-icons-octicon "file-directory" :v-adjust 0 :face face-spec))
+         :icon (format "\t\t%s\t"
+                       (all-the-icons-faicon "folder-open-o" :v-adjust -0.12 :height 0.8 :face 'all-the-icons-lsilver))
          :extensions (dir-open))
         (treemacs-create-icon
-         :icon (format "%s\t%s\t"
-                       (all-the-icons-octicon "chevron-right" :height 0.75 :v-adjust 0.1 :face face-spec)
-                       (all-the-icons-octicon "file-directory" :v-adjust 0 :face face-spec))
+         :icon (format "\t\t%s\t"
+                       (all-the-icons-faicon "folder" :v-adjust -0.12 :height 0.8 :face 'all-the-icons-lsilver))
          :extensions (dir-closed))
         (treemacs-create-icon
          :icon (format "%s\t%s\t"
@@ -179,7 +177,7 @@ Only takes effect if `doom-themes-treemacs-enable-variable-pitch' is non-nil."
                       "jpeg" "jpg" "midi" "mkv" "mov" "mp3" "mp4" "ogg" "png"
                       "psd" "svg" "tif" "tiff" "wav" "webm" "webp"))
         (treemacs-create-icon
-         :icon (format "  %s\t" (all-the-icons-octicon "file-code" :v-adjust 0 :face face-spec))
+         :icon (format "  %s\t" (all-the-icons-material "code" :v-adjust -0.25 :height 0.85 :face 'all-the-icons-dsilver))
          :extensions ("accdb" "accdt" "actionscript" "adoc" "adoc" "ansible"
                       "antlr" "applescript" "asciidoc" "asm" "c" "cask" "cc"
                       "cc" "clj" "cljc" "cljs" "cmake" "coffee" "cpp" "css"
@@ -239,7 +237,7 @@ Only takes effect if `doom-themes-treemacs-enable-variable-pitch' is non-nil."
          :icon (format "  %s\t" (all-the-icons-octicon "file-zip" :v-adjust 0 :face face-spec))
          :extensions ("zip" "xz" "7z" "tar" "gz" "rar" "tgz" "jar"))
         (treemacs-create-icon
-         :icon (format "  %s\t" (all-the-icons-octicon "file-text" :v-adjust 0 :face face-spec))
+         :icon (format "  %s\t" (all-the-icons-material "settings" :v-adjust -0.15 :height 0.65 :face 'all-the-icons-dsilver))
          :extensions (fallback))))
 
     (treemacs-create-theme "doom-colors"
@@ -247,10 +245,10 @@ Only takes effect if `doom-themes-treemacs-enable-variable-pitch' is non-nil."
       :config
       (progn
         (treemacs-create-icon
-         :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
+         :icon (format " \t%s\t" (all-the-icons-faicon "folder-open-o" :v-adjust -0.12 :height 0.8 :face 'all-the-icons-lsilver))
          :extensions (root-open))
         (treemacs-create-icon
-         :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
+         :icon (format " \t%s\t" (all-the-icons-faicon "folder" :v-adjust -0.12 :height 0.8 :face 'all-the-icons-lsilver))
          :extensions (root-closed))
         (treemacs-create-icon
          :icon (format "%s\t" (all-the-icons-octicon "flame" :height 0.8 :v-adjust 0 :face 'all-the-icons-red))
@@ -262,7 +260,7 @@ Only takes effect if `doom-themes-treemacs-enable-variable-pitch' is non-nil."
          :icon (format "%s\t" (all-the-icons-octicon "info" :height 0.75 :v-adjust 0.1 :face 'all-the-icons-green))
          :extensions (info))
         (treemacs-create-icon
-         :icon (format "  %s\t" (all-the-icons-alltheicon "git" :height 0.85 :v-adjust 0.0 :face 'all-the-icons-red))
+         :icon (format "  %s\t" (all-the-icons-alltheicon "git" :height 0.25 :v-adjust 0.0 :face 'all-the-icons-red))
          :extensions ("gitignore" "git" "gitattributes" "gitconfig" "gitmodules"))
         (treemacs-create-icon
          :icon (format "%s\t" (all-the-icons-octicon "book" :height 1.0 :v-adjust 0.0 :face 'all-the-icons-blue))
@@ -271,7 +269,9 @@ Only takes effect if `doom-themes-treemacs-enable-variable-pitch' is non-nil."
         (dolist (item all-the-icons-extension-icon-alist)
           (let* ((extension (car item))
                  (func (cadr item))
-                 (args (append (list (cadr (cdr item))) '(:v-adjust -0.05 :height 0.85) (cdr (cddr item))))
+                 (args (append (list (cadr (cdr item))) (cdr (cddr item))))
+                 (adjustment (unless (member :height item) '(:v-adjust -0.10 :height 0.85)))
+                 (args (append (list (cadr (cdr item))) adjustment (cdr (cddr item))))
                  (icon (apply func args)))
             (let* ((icon-pair (cons (format "  %s\t" icon) " "))
                    (gui-icons (treemacs-theme->gui-icons treemacs--current-theme))

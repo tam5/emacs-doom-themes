@@ -16,6 +16,12 @@
   :group 'doom-seti-theme
   :type 'boolean)
 
+(defcustom doom-seti-colorful-headers nil
+  "If non-nil, headers in org-mode will be more colorful; which is truer to the
+original Dracula Emacs theme."
+  :group 'doom-dracula-theme
+  :type 'boolean)
+
 (defcustom doom-seti-comment-bg doom-seti-brighter-comments
   "If non-nil, comments will have a subtle, darker background. Enhancing their
 legibility."
@@ -33,50 +39,51 @@ determine the exact padding."
   "A dark theme inspired by Atom One Dark"
 
   ;; name        default   256       16
-  ((bg         '("#282c34" nil       nil            ))
-   (bg-alt     '("#0D1011" nil       nil            ))
-   (base0      '("#1B2229" "black"   "black"        ))
-   (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
-   (base2      '("#202328" "#2e2e2e" "brightblack"  ))
-   (base3      '("#23272e" "#262626" "brightblack"  ))
-   (base4      '("#3f444a" "#3f3f3f" "brightblack"  ))
-   (base5      '("#5B6268" "#525252" "brightblack"  ))
-   (base6      '("#73797e" "#6b6b6b" "brightblack"  ))
-   (base7      '("#9ca0a4" "#979797" "brightblack"  ))
-   (base8      '("#DFDFDF" "#dfdfdf" "white"        ))
-   (fg         '("#bbc2cf" "#bfbfbf" "brightwhite"  ))
-   (fg-alt     '("#5B6268" "#2d2d2d" "white"        ))
+  ((bg         '("#171C20" "#262626" nil            )) ;; main background
+   (bg-alt     '("#0D1011" "#1c1c1c" nil            )) ;; sidebar and outer background
+   (base0      '("#303D4A" "#1c1c1c"   "black"      )) ;; matching paren
+   (base1      '("#0D1011" "#1e1e1e" "brightblack"  )) ;; window dividers, completion
+   (base2      '("#151A1D" "#2e2e2e" "brightblack"  )) ;; treemacs highlight line
+   (base3      '("#303D4A" "#262626" "brightblack"  )) ;; highlight of completion
+   (base4      '("#ffff00" "#3f3f3f" "brightblack"  ))
+   (base5      '("#2F353C" "#525252" "brightblack"  )) ;; line numbers, inactive modeline, comments
+   (base6      '("#b6b6b2" "#bbbbbb" "brightblack"  ))
+   (base7      '("#ccccc7" "#cccccc" "brightblack"  ))
+   (base8      '("#f8f8f2" "#dfdfdf" "white"        ))
+   (fg         '("#f8f8f2" "#ffffff" "white"        ))
+   (fg-alt     '("#aaaaaa" "#bfbfbf" "brightwhite"  ))
 
    (grey       base4)
-   (red        '("#ff6c6b" "#ff6655" "red"          ))
-   (orange     '("#da8548" "#dd8844" "brightred"    ))
-   (green      '("#98be65" "#99bb66" "green"        ))
-   (teal       '("#4db5bd" "#44b9b1" "brightgreen"  ))
-   (yellow     '("#ECBE7B" "#ECBE7B" "yellow"       ))
-   (blue       '("#51afef" "#51afef" "brightblue"   ))
-   (dark-blue  '("#2257A0" "#2257A0" "blue"         ))
-   (magenta    '("#c678dd" "#c678dd" "brightmagenta"))
-   (violet     '("#a9a1e1" "#a9a1e1" "magenta"      ))
-   (cyan       '("#46D9FF" "#46D9FF" "brightcyan"   ))
-   (dark-cyan  '("#5699AF" "#5699AF" "cyan"         ))
+   (red        '("#EA7686" "#ff6655" "red"          ))
+   (orange     '("#ffb86c" "#ffbb66" "brightred"    ))
+   (green      '("#50fa7b" "#55ff77" "green"        ))
+   (teal       '("#19A288" "#0088cc" "brightgreen"  ))
+   (yellow     '("#FFDF00" "#ffff88" "yellow"       ))
+   (blue       '("#AED5FC" "#66bbff" "brightblue"   ))
+   (dark-blue  '("#0189cc" "#0088cc" "blue"         ))
+   (magenta    '("#C477DB" "#ff77cc" "magenta"      ))
+   (violet     '("#bd93f9" "#bb99ff" "brightmagenta"))
+   (cyan       '("#8be9fd" "#88eeff" "brightcyan"   ))
+   (dark-cyan  '("#8be9fd" "#88eeff" "cyan"         ))
 
    ;; face categories -- required for all themes
-   (highlight      blue)
+   (highlight      yellow)
    (vertical-bar   (doom-darken base1 0.1))
    (selection      dark-blue)
-   (builtin        magenta)
-   (comments       (if doom-seti-brighter-comments dark-cyan base5))
-   (doc-comments   (doom-lighten (if doom-seti-brighter-comments dark-cyan base5) 0.25))
-   (constants      violet)
-   (functions      magenta)
-   (keywords       blue)
-   (methods        cyan)
-   (operators      blue)
-   (type           yellow)
-   (strings        green)
-   (variables      (doom-lighten magenta 0.4))
-   (numbers        orange)
-   (region         `(,(doom-lighten (car bg-alt) 0.15) ,@(doom-lighten (cdr base1) 0.35)))
+   (builtin        orange)
+   (comments       (if doom-seti-brighter-comments dark-cyan (doom-lighten base5 0.1)))
+   (doc-comments       (if doom-seti-brighter-comments dark-cyan (doom-lighten base5 0.1)))
+   (constants      dark-blue)
+   (functions      teal)
+   (keywords       red)
+   (methods        teal)
+   (operators      red)
+   (type           fg)
+   (strings        blue)
+   (variables      orange)
+   (numbers        red)
+   (region         base3)
+
    (error          red)
    (warning        yellow)
    (success        green)
@@ -85,33 +92,48 @@ determine the exact padding."
    (vc-deleted     red)
 
    ;; custom categories
-   (hidden     `(,(car bg) "black" "black"))
+   (level1 magenta)
+   (level2 violet)
+   (level3 (if doom-seti-colorful-headers green   (doom-lighten violet 0.35)))
+   (level4 (if doom-seti-colorful-headers yellow  (doom-lighten magenta 0.35)))
+   (level5 (if doom-seti-colorful-headers cyan    (doom-lighten violet 0.6)))
+   (level6 (if doom-seti-colorful-headers orange  (doom-lighten magenta 0.6)))
+   (level7 (if doom-seti-colorful-headers blue    (doom-lighten violet 0.85)))
+   (level8 (if doom-seti-colorful-headers magenta (doom-lighten magenta 0.85)))
+   (level9 (if doom-seti-colorful-headers violet  (doom-lighten violet 0.95)))
+
+   (hidden     base1)
    (-modeline-bright doom-seti-brighter-modeline)
    (-modeline-pad
     (when doom-seti-padded-modeline
       (if (integerp doom-seti-padded-modeline) doom-seti-padded-modeline 4)))
 
-   (modeline-fg     fg)
+   (modeline-fg     fg-alt)
    (modeline-fg-alt base5)
 
    (modeline-bg
+
     (if -modeline-bright
-        (doom-darken blue 0.475)
-      `(,(doom-darken (car bg-alt) 0.15) ,@(cdr base0))))
+        (doom-darken  magenta 0.675)
+      `(,(car bg) ,@(cdr base0))))
    (modeline-bg-l
     (if -modeline-bright
-        (doom-darken blue 0.45)
-      `(,(doom-darken (car bg-alt) 0.1) ,@(cdr base0))))
-   (modeline-bg-inactive   `(,(doom-darken (car bg-alt) 0.1) ,@(cdr bg-alt)))
-   (modeline-bg-inactive-l `(,(car bg-alt) ,@(cdr base1))))
+        (doom-darken magenta 0.6)
+      `(,(doom-darken (car bg) 0.15) ,@(cdr base0))))
+   (modeline-bg-inactive   (doom-darken bg 0.1))
+   (modeline-bg-inactive-l `(,(doom-darken (car bg) 0.075) ,@(cdr base1))))
 
 
   ;; --- extra faces ------------------------
   ((elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
 
-   (evil-goggles-default-face :inherit 'region :background (doom-blend region bg 0.5))
+   (match               :foreground yellow      :background nil :weight 'bold)
+   (highlight           :background nil  :foreground fg :distant-foreground nil) ;;; buttons and stuff
+   (lazy-highlight      :background nil :box `(:line-width -1 :color ,fg-alt))
+   (paren-face-match    :foreground nil   :background nil :weight 'ultra-bold :underline t)
+   (minibuffer-prompt   :foreground fg-alt)
 
-   ((line-number &override) :foreground base4)
+   ((line-number &override) :foreground base5)
    ((line-number-current-line &override) :foreground fg)
 
    (font-lock-comment-face
@@ -120,15 +142,15 @@ determine the exact padding."
    (font-lock-doc-face
     :inherit 'font-lock-comment-face
     :foreground doc-comments)
-
+   (solaire-hl-line-face :background base2)
+   (doom-modeline-bar :background nil)
    (mode-line
     :background modeline-bg :foreground modeline-fg
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
    (mode-line-inactive
     :background modeline-bg-inactive :foreground modeline-fg-alt
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
-   (mode-line-emphasis
-    :foreground (if -modeline-bright base8 highlight))
+   (mode-line-emphasis :foreground nil)
 
    (solaire-mode-line-face
     :inherit 'mode-line
@@ -139,40 +161,107 @@ determine the exact padding."
     :background modeline-bg-inactive-l
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive-l)))
 
-   ;; Doom modeline
-   (doom-modeline-bar :background (if -modeline-bright modeline-bg highlight))
-   (doom-modeline-buffer-file :inherit 'mode-line-buffer-id :weight 'bold)
-   (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
-   (doom-modeline-buffer-project-root :foreground green :weight 'bold)
-
-   ;; ivy-mode
-   (ivy-current-match :background dark-blue :distant-foreground base0 :weight 'normal)
-
    ;; --- major-mode faces -------------------
    ;; css-mode / scss-mode
-   (css-proprietary-property :foreground orange)
-   (css-property             :foreground green)
-   (css-selector             :foreground blue)
-
-   ;; LaTeX-mode
-   (font-latex-math-face :foreground green)
+   (css-proprietary-property :foreground violet)
+   (css-property             :foreground violet)
+   (css-selector             :foreground green)
 
    ;; markdown-mode
    (markdown-markup-face :foreground base5)
    (markdown-header-face :inherit 'bold :foreground red)
-   ((markdown-code-face &override) :background (doom-lighten base3 0.05))
+   ((markdown-code-face &override) :background (doom-darken 'bg 0.075))
 
    ;; org-mode
-   (org-hide :foreground hidden)
-   (solaire-org-hide-face :foreground hidden)
+   ((outline-1 &override) :foreground level1)
+   (outline-2 :inherit 'outline-1 :foreground level2)
+   (outline-3 :inherit 'outline-1 :foreground level3)
+   (outline-4 :inherit 'outline-1 :foreground level4)
+   (outline-5 :inherit 'outline-1 :foreground level5)
+   (outline-6 :inherit 'outline-1 :foreground level6)
+   (outline-7 :inherit 'outline-1 :foreground level7)
 
-   ;; lsp-mode
-   (lsp-headerline-breadcrumb-separator-face :foreground green)
+   (org-todo :foreground orange :bold 'inherit :background (doom-darken base1 0.02))
+   (org-done :foreground green :strike-through nil :background base2 :bold t)
+   (org-headline-done :foreground base4 :strike-through nil)
+   ((org-tag &override) :foreground (doom-lighten orange 0.3))
+   (org-agenda-date :foreground cyan)
+   (org-agenda-dimmed-todo-face :foreground comments)
+   (org-agenda-done :foreground base4)
+   (org-agenda-structure :foreground violet)
+   ((org-block &override) :background (doom-darken base1 0.125) :foreground violet)
+   ((org-block-begin-line &override) :background (doom-darken base1 0.125) :foreground comments)
+   (org-code :foreground yellow)
+   (org-column :background base1)
+   (org-column-title :background base1 :bold t :underline t)
+   (org-date :foreground cyan)
+   (org-document-info :foreground blue)
+   (org-document-info-keyword :foreground comments)
+   (org-ellipsis :foreground comments)
+   (org-footnote :foreground blue)
+   (org-headline-base :foreground comments :strike-through t :bold nil)
+   (org-link :foreground orange :underline t :weight 'bold)
+   (org-priority :foreground cyan)
+   (org-scheduled :foreground green)
+   (org-scheduled-previously :foreground yellow)
+   (org-scheduled-today :foreground orange)
+   (org-sexp-date :foreground base4)
+   (org-special-keyword :foreground yellow)
+   (org-table :foreground violet)
+   (org-upcoming-deadline :foreground yellow)
+   (org-warning :foreground magenta)
 
-   ;; rjsx
-   (rjsx-tag :foreground red)
-   (rjsx-attr :foreground orange)
+   ;; tooltip and company
+   (tooltip              :background bg-alt :foreground fg)
+   (company-tooltip-selection     :background base3)
 
+   ;; rjsx-mode
+   (rjsx-tag :foreground magenta)
+   (rjsx-attr :foreground green :slant 'italic :weight 'medium)
+
+   ;; js2-mode
+   (js2-external-variable :foreground violet)
+   (js2-function-param :foreground cyan)
+   (js2-jsdoc-html-tag-delimiter :foreground yellow)
+   (js2-jsdoc-html-tag-name :foreground dark-blue)
+   (js2-jsdoc-value :foreground yellow)
+   (js2-private-function-call :foreground cyan)
+   (js2-private-member :foreground base7)
+
+   ;; web-mode
+   (web-mode-builtin-face :foreground orange)
+   (web-mode-css-selector-face :foreground green)
+   (web-mode-html-attr-name-face :foreground green)
+   (web-mode-html-tag-bracket-face :inherit 'default)
+   (web-mode-html-tag-face :foreground magenta :weight 'bold)
+   (web-mode-preprocessor-face :foreground orange)
+
+   ;; helm
+   (helm-bookmark-w3m :foreground violet)
+   (helm-buffer-not-saved :foreground violet)
+   (helm-buffer-process :foreground orange)
+   (helm-buffer-saved-out :foreground fg)
+   (helm-buffer-size :foreground fg)
+   (helm-candidate-number :foreground bg :background fg)
+   (helm-ff-directory :foreground green :weight 'bold)
+   (helm-ff-executable :foreground dark-blue :inherit 'italic)
+   (helm-ff-invalid-symlink :foreground magenta :weight 'bold)
+   (helm-ff-prefix :foreground bg :background magenta)
+   (helm-ff-symlink :foreground magenta :weight 'bold)
+   (helm-grep-finish :foreground base2)
+   (helm-grep-running :foreground green)
+   (helm-header :foreground base2 :underline nil :box nil)
+   (helm-moccur-buffer :foreground green)
+   (helm-separator :foreground violet)
+   (helm-source-go-package-godoc-description :foreground yellow)
+   ((helm-source-header &override) :foreground magenta)
+   (helm-time-zone-current :foreground orange)
+   (helm-time-zone-home :foreground violet)
+   (helm-visible-mark :foreground bg :background base3)
+
+   ;; highlight-quoted-mode
+   (highlight-quoted-symbol :foreground cyan)
+   (highlight-quoted-quote  :foreground magenta)
 
    (treemacs-file-face :foreground "#aaaaaa")
    (treemacs-directory-face :foreground "#aaaaaa")

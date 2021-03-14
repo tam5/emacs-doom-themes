@@ -129,7 +129,7 @@ determine the exact padding."
 
    (match               :foreground yellow      :background nil :weight 'bold)
    (highlight           :background nil  :foreground fg :distant-foreground nil) ;;; buttons and stuff
-   (lazy-highlight      :background nil :box `(:line-width -1 :color ,fg-alt))
+   (lazy-highlight      :background nil :box `(:line-width -1 :color ,base5))
    (paren-face-match    :foreground nil   :background nil :weight 'ultra-bold :underline t)
    (minibuffer-prompt   :foreground fg-alt)
 
@@ -143,11 +143,25 @@ determine the exact padding."
     :inherit 'font-lock-comment-face
     :foreground doc-comments)
    (solaire-hl-line-face :background base2)
-   (doom-modeline-bar :background nil)
+   ;; (doom-modeline-bar :background nil)
+   (doom-modeline-project-root-dir :foreground fg-alt :weight 'normal)
+   (doom-modeline-project-dir :foreground fg-alt :weight 'normal)
+   (doom-modeline-buffer-path :foreground fg-alt :weight 'normal)
+   (doom-modeline-buffer-file :foreground fg-alt :weight 'normal)
+   (doom-modeline-buffer-modified :foreground fg-alt :weight 'normal)
+   (doom-modeline-info :foreground fg-alt)
+   ;; (doom-modeline-bar :foreground green)
+   ;; (doom-modeline-highlight :foreground blue)
+
+   (+workspace-tab-face :foreground fg-alt)
+   (+workspace-tab-selected-face :foreground fg)
+
    (mode-line
+    :family "Roboto" :height 125 :weight 'normal
     :background modeline-bg :foreground modeline-fg
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
    (mode-line-inactive
+    :family "Roboto" :height 125 :weight 'normal
     :background modeline-bg-inactive :foreground modeline-fg-alt
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
    (mode-line-emphasis :foreground nil)
